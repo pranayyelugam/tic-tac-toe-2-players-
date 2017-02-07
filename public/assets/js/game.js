@@ -64,7 +64,7 @@ $(document).ready(function(){
 					})
 					turn = true
 					if(currentMoves >= movesBeforeWin) {
-                        process()
+                        process(id)
                     }
 		})
 		conn.on('close', function() {
@@ -79,7 +79,7 @@ $(document).ready(function(){
 		})
 	}
 
-	function process(){
+	function process( idi){
         //row
         for( i = 0; i < 3; i++) {
             if(hasWonRow == false) {
@@ -133,6 +133,11 @@ $(document).ready(function(){
             console.log(hasWonDiagonal1)
             console.log(hasWonDiagonal2)
             didwin = true
+            if(idi==peerId){
+            	console.log('I have won')
+            }else{
+            	console.log('opponenthas won')
+            }
             winnerFound = true
             for(i=0;i<3;i++){
                 for(j=0;j<3;j++){
@@ -196,7 +201,7 @@ $(document).ready(function(){
 		conn.send([peerId,currentRow,currentColumn,currentMoves])
 		turn = false
         if(currentMoves >= movesBeforeWin) {
-            process()
+            process(peerId)
         }
 		
 
